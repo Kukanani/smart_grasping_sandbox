@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+
 nohup Xvfb :1 -screen 0 1024x768x16 &> xvfb.log &
 DISPLAY=:1.0
 export DISPLAY
@@ -13,6 +14,7 @@ roslaunch smart_grasping_sandbox smart_grasping_sandbox.launch gui:=false gzweb:
 sleep 5
 
 cd ~/gzweb
+npm start &
 GAZEBO_MODEL_PATH=/workspace/src:/workspace/src/universal_robot:~/.gazebo/models:${GAZEBO_MODEL_PATH} ./start_gzweb.sh &
 
 cd ~/c9sdk

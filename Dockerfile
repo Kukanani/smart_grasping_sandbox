@@ -31,9 +31,17 @@ RUN source /opt/ros/indigo/setup.bash && \
     rosdep install --default-yes --all --ignore-src && \
     catkin build --cmake-args -DCMAKE_BUILD_TYPE=Release
 
+# install nvm and node
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 6.1.0
+RUN . /root/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION
+ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
 # installing gzweb
 RUN curl -sL https://deb.nodesource.com/setup | bash - && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libjansson-dev nodejs libboost-dev imagemagick libtinyxml-dev mercurial cmake build-essential xvfb
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libjansson-dev libboost-dev imagemagick libtinyxml-dev mercurial cmake build-essential xvfb
 
 RUN /workspace/src/setup_gzweb.sh
 
