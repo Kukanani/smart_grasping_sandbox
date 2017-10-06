@@ -9,7 +9,9 @@ export DISPLAY
 source "/workspace/devel/setup.bash"
 source "/usr/share/gazebo/setup.sh"
 
-roslaunch smart_grasping_sandbox smart_grasping_sandbox.launch gui:=false gzweb:=true verbose:=true &
+roslaunch stevia_data_collector empty_world.launch gui:=false &
+
+# roslaunch smart_grasping_sandbox smart_grasping_sandbox.launch gui:=false gzweb:=true verbose:=true &
 
 sleep 5
 

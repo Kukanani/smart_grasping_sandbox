@@ -18,9 +18,27 @@ RUN apt-get update && \
 
 COPY . /workspace/src/
 
+# set up to allow private github repository clones
+# see https://stackoverflow.com/questions/23391839/clone-private-git-repo-with-dockerfile
+RUN apt-get -yqq install ssh
+# # Make ssh dir
+# RUN mkdir /root/.ssh/
+
+# # Copy over private key, and set permissions
+# ADD id_rsa /root/.ssh/id_rsa
+
+# # Create known_hosts
+# RUN touch /root/.ssh/known_hosts
+# # Add bitbuckets key
+# RUN ssh-keyscan -T 60 github.com >> /root/.ssh/known_hosts
+
+# Get some code!
 RUN source /opt/ros/indigo/setup.bash && \
     cd /workspace/src && \
-    git clone -b indigo-devel https://github.com/ros-simulation/gazebo_ros_pkgs.git && \
+
+    git clone -b indigo-devel https://ee828f1fb5bf7076a37c26f79c1d8ff2f1086c12@github.com/Kukanani/gazebo_ros_pkgs && \
+    git clone https://ee828f1fb5bf7076a37c26f79c1d8ff2f1086c12@github.com/Kukanani/stevia && \
+
     git clone https://github.com/shadow-robot/pysdf.git && \
     git clone -b F_add_moveit_funtionallity https://github.com/shadow-robot/gazebo2rviz.git && \
     git clone -b F_gazebo_7_docker https://github.com/shadow-robot/universal_robot.git && \
