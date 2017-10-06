@@ -48,6 +48,7 @@ RUN source /opt/ros/indigo/setup.bash && \
     git clone -b F_gazebo_7_docker https://github.com/shadow-robot/universal_robot.git && \
     git clone -b F#182_partial_trajectory_mod  https://github.com/shadow-robot/ros_controllers.git && \
     wget https://raw.githubusercontent.com/osrf/osrf-rosdep/master/gazebo7/00-gazebo7.list -O /etc/ros/rosdep/sources.list.d/00-gazebo7.list && \
+    apt-get update && \
     rosdep update && \
     rosdep install --default-yes --all --ignore-src && \
     catkin build --cmake-args -DCMAKE_BUILD_TYPE=Release
