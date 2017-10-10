@@ -7,17 +7,16 @@ export DISPLAY
 source "/workspace/devel/setup.bash"
 source "/usr/share/gazebo/setup.sh"
 
-#
 cd /root
 hg clone https://bitbucket.org/osrf/gzweb
 
-# predownload models and copy to the Gazebo models directory
-# wget -l 2 -nc -r "http://models.gazebosim.org/" --accept gz
-# cd "models.gazebosim.org"
-# for i in * ; do tar -zvxf "$i/model.tar.gz" ; done
-# mkdir -p $HOME/.gazebo/models
-# cp -vfR * "$HOME/.gazebo/models/"
+predownload models and copy to the Gazebo models directory
+wget -l 2 -nc -r "http://models.gazebosim.org/" --accept gz
+cd "models.gazebosim.org"
+for i in * ; do tar -zvxf "$i/model.tar.gz" ; done
+mkdir -p $HOME/.gazebo/models
+cp -vfR * "$HOME/.gazebo/models/"
 
 # Do additional deployment steps required by GZweb
 cd /root/gzweb
-GAZEBO_MODEL_PATH=/workspace/src:/workspace/src/universal_robot:~/.gazebo/models:${GAZEBO_MODEL_PATH} ./deploy.sh #-m
+GAZEBO_MODEL_PATH=/workspace/src:/workspace/src/universal_robot:~/.gazebo/models:${GAZEBO_MODEL_PATH} ./deploy.sh -m

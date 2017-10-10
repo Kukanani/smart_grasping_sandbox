@@ -9,7 +9,7 @@ export DISPLAY
 source "/workspace/devel/setup.bash"
 source "/usr/share/gazebo/setup.sh"
 
-roslaunch stevia_data_collector empty_world.launch gui:=false &
+roslaunch stevia_data_collector setup_world.launch gui:=false &
 
 sleep 5
 
